@@ -1,5 +1,6 @@
 # STA-S380 Exercises
 ## Probability Practice
+### Part A
 **Part A**<br>
 Using the rule of total probability, we know that:
 ```math
