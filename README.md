@@ -1,6 +1,6 @@
 # STA-S380 Exercises
 ## Probability Practice
-**Part A**\n
+**Part A**<br>
 Using the rule of total probability, we know that:
 ```math
 P(\text{Yes}) = P(\text{RC}) \times P(\text{Yes} | \text{RC}) + P(\text{TC}) \times P(\text{Yes} | \text{TC}) = P(\text{Yes})
