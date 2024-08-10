@@ -26,6 +26,6 @@ Filling in the Equation with the given information, we know:
 ```
 AS a result, we know that the probaility of someone testing positive is .000125. To find the probability that someone that tested positive actually has the disease, we can plug this into our original equation:
 ``` math
-P(\text{Disease} \mid \text{Positive}) = \frac{.000025 \times .993} \mid \text{Disease})}{.000125}
+P(\text{Disease} \mid \text{Positive}) = \frac{0.000025 \times 0.993}{0.000125}
 ```
 After solving this equation, we find that **there is a 19.89% chance that they have the disease**.
