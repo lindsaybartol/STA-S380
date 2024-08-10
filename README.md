@@ -20,4 +20,8 @@ Filling in the Equation with the given information, we know:
 ```math
 0.999975 \times 0.0001 + 0.000025 \times 0.993 = P(\text{Positive})
 ```
-AS a result, we know that the probaility of someone testing positive is .000124. To find the probability that someone that tested positive actually has the disease
+AS a result, we know that the probaility of someone testing positive is .000124. To find the probability that someone that tested positive actually has the disease, we divide P(Disease) * P(Positive | Disease) by the overall proability of someone testing postive:
+``` math
+\frac{P(\text{Disease}) \times P(\text{Positive} \mid \text{Disease})}{P(\text{Positive})}
+```
+After solving this equation, we find that **there is a 19.89% chance that they have the disease**.
