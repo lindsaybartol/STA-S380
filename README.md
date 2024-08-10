@@ -1,1 +1,3 @@
-# STA-S380
+# STA-S380 Exercises
+## Probability Parctice
+**Part A**
