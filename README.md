@@ -29,3 +29,4 @@ AS a result, we know that the probaility of someone testing positive is .000125.
 P(\text{Disease} \mid \text{Positive}) = \frac{0.000025 \times 0.993}{0.000125}
 ```
 After solving this equation, we find that **there is a 19.89% chance that they have the disease**.
+## Wrangling the Billboard Top 100
