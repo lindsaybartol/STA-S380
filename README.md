@@ -32,6 +32,7 @@ After solving this equation, we find that **there is a 19.89% chance that they h
 ## Wrangling the Billboard Top 100
 ### Part A
 
-Here is a visual representation of the top 10 most popular songs based on the number of weeks they spent on the Billboard Top 100:
-
+Here is a table showing the top 10 most popular songs since 1958, based on the total number of weeks spent on the Billboard Top 100:
 ![Top 10 Most Popular Songs](Top%2010%20Most%20Popular%20Songs.png)
+
+### Part B
