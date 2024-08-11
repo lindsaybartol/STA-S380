@@ -34,14 +34,15 @@ After solving this equation, we find that **there is a 19.89% chance that they h
 
 Here is a table showing the top 10 most popular songs since 1958, based on the total number of weeks spent on the Billboard Top 100:
 ![Top 10 Most Popular Songs](Top%2010%20Most%20Popular%20Songs.png)
-The code for creating this table can be found [here.](Billboard%20Top%20100.ipynb#part-a)
+The code for creating this table can be found [here](Billboard%20Top%20100.ipynb#part-a).
 ### Part B
 Here is a graph depicting the number of unique songs on the Billboard Top 100 from 1959-2020:
 ![Musical Diversity Over Time](Musical_Diversity.png)
 Here, we see a peak of over 800 songs from 1965-1970 before there is a steep drop. In the early 2000s, the music diversity hits a low with just under 400 songs. Then, it quickly jumps back up, almost reaching 800 again in 2020.  
-<br>The code for this graph can be found here.
+<br>The code for this graph can be found [here](Billboard%20Top%20100.ipynb#part-b).
 ### Part C
 Here is a bar plot of the number of 10-week hits that artists with over 30 10-week hits have:  
 <br>
 ![Most 10 Week Hits](10_Week_Hits.png)
-We can see that Elton John is the artist with the most 10-week hits, with over 50 songs that have stayed on the Billboard Top 100 for at least 10 weeks. He is followed by Madonna, who has just under 44, then Kenny Chesney, who has 42.
+We can see that Elton John is the artist with the most 10-week hits, with over 50 songs that have stayed on the Billboard Top 100 for at least 10 weeks. He is followed by Madonna, who has just under 44, then Kenny Chesney, who has 42.  
+<br>The code for this graph can be found [here](Billboard%20Top%20100.ipynb#part-c).
