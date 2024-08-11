@@ -30,3 +30,8 @@ P(\text{Disease} \mid \text{Positive}) = \frac{0.000025 \times 0.993}{0.000125}
 ```
 After solving this equation, we find that **there is a 19.89% chance that they have the disease**.
 ## Wrangling the Billboard Top 100
+### Part A
+
+Here is a visual representation of the top 10 most popular songs based on the number of weeks they spent on the Billboard Top 100:
+
+![Top 10 Most Popular Songs](Top%2010%20Most%20Popular%20Songs.png)
