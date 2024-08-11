@@ -36,3 +36,7 @@ Here is a table showing the top 10 most popular songs since 1958, based on the t
 ![Top 10 Most Popular Songs](Top%2010%20Most%20Popular%20Songs.png)
 The code for creating this table can be found here.
 ### Part B
+Here is a graph depicting the number of unique songs on the Billboard Top 100 from 1959-2020:
+![Musical Diversity Over Time](Musical_Diversity.png)
+Here, we see a peak of over 800 songs from 1965-1970 before there is a steep drop. In the early 2000s, the music diversity hits a low with just under 400 songs. Then, it quickly jumps back up, almost reaching 800 again in 2020.  
+<br>The code for this graph can be found here.
