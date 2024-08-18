@@ -155,3 +155,22 @@ Next, I wanted to explore some rarer combos. I thought this would be important a
 These combinations seem a little more bizarre to me. I am unsure what the link between hamburger meat and instant food products is. However, the lift here is huge. I would like more information on what exactly "instant food products" include. Popcorn and salty snacks is an interesting combination to me as well, as I would have thought they'd be substitutes, not complements. the same goes for beer and liquor. Maybe people were shopping for parties. Rice and vegetables make sense. However, again, I am unsure what the link between turkey and tropical fruit would be. I would guess they are both just bought fairly frequently, and so they end up together at random.  
 <br> Overall, we can definitely see some meaningful relationships throughout this data, and I believe that this analysis would give a small grocer a valuable list of items to combine in specials and discounts. The main recommendation I would make would be to first choose the items in the first list that have a high lift and a relatively larger support. This would include combinations like beef and root vegetables, onions and root vegetables, and berries and whipped cream.
 <br>[Here is the code for this problem.](Association%-%Groceries.ipynb)
+## Image Classification with Neural Networks
+After loading in the data, I built a CNN model to classify the images into one of eleven categories. My model employed two convolution layers and was trained using 25 epochs using the Adam optimizer. I found that fewer epochs resulted in my lower accuracy. 25 epochs seemed to be the sweet spot for reaching a higher accuracy without taking immense amounts of time to run. Below, you can see some of the predictions on the test images.
+
+<br> The overall accuracy of my model was 84.37%. This is measured as the total correct prediction out of the total predictions.
+<br> The accuracies for each category were as follows:
+- Accuracy of AnnualCrop: 89.70%
+- Accuracy of Forest: 93.91%
+- Accuracy of HerbaceousVegetation: 84.22%
+- Accuracy of Highway: 68.60%
+- Accuracy of Industrial: 90.60%
+- Accuracy of Pasture: 82.64%
+- Accuracy of PermanentCrop: 61.36%
+- Accuracy of Residential: 94.95%
+- Accuracy of River: 72.84%
+- Accuracy of SeaLake: 95.33%
+<br> The accuracy here is measured as the total correct predictions for a class out of the total predictions made for that class. We can see that SeaLake was the easiest category to predict, followed by Residential and Forest. The most difficult were PermanentCrop and Highway. To better understand where the model was making mistakes, I have included a correlation matrix below.
+
+Now, we can see that the model often guessed PermanentCrop for Highway, and it predicted Highway for River and PermanentCrop. On the other side, for PermanentCrop, the model often guessed HerbaciousVegetation or Highway. Then, for Highway, the model often mistook it for River or HerbaciousVegetation.
+<br> Overall, the model did fairly well. Going forward, I would ideally train it with more epochs and see if that resulted in a higher accuracy. However, this was simply not a viable option while I am running the model on my laptop.
