@@ -72,19 +72,22 @@ In terms of lateness, there aren't any extremely strong patterns, but there are 
 <br> [Here is the code for this problem.](Capital%20Metro.ipynb)
 ## Clustering and Dimensionality Reduction
 In approaching this problem, I first ran PCA and tSNE to get a visual idea of how these techniques would group the wines. Then, I ran K-Means Clustering on the two different sets of dimension-reduced data to see which technique would make it easier to group the wines by color. Finally, even though it is not traditional to train and test with unsupervised techniques, I decided that it made sense to do so in this problem so that I could quantify how well we could predict color with each type of reduced dimensions. After the analysis on color, I did a smaller analysis on quality.  
-<br>First, let's take a look at PCA. After running PCA on the data, I found that these two colors seemed to be grouped quite effectively, as seen in the graph below. There is definitely a little bit of overlap in the center, but for the most part, there are two clear color clusters
-
+<br>First, let's take a look at PCA. After running PCA on the data, I found that these two colors seemed to be grouped quite effectively, as seen in the graph below. There is definitely a little bit of overlap in the center, but for the most part, there are two clear color clusters.
+![PCA Color](PCA_color.png)
 After reducing the dimensions, I ran K-means clustering. Below is a graph showing where the cluster centers were found. Obviously, the technique seems quite effective, as it has found the centers of the red and yellow clusters. This clustering technique reached a 98% accuracy for grouping the wines based on color.
-
+![PCA Clusters](PCA_clusters.png)
 Finally, I wanted to split the data into a training and testing set in order to see how well it might predict the color of a new wine based on its other qualities. Below you'll see two graphs of the testing data: one for the predicted color and one for the actual color. Again, there was a 98% accuracy on prediction.  
+![PCA Predictions](PCA_predictions.png)
 <br>Now, let's take a look at tSNE. Below you'll see the graph after running tSNE. Again, this technique seemed to do a really good job of separating the two colors. 
-
+![t-SNE Color](tSNE_color.png)
 However, while the groups seem very clear to the naked eye, K-Means clustering had a slightly harder time distinguishing them, as we can see below. The centers are mostly well-placed, but a little off. The overall accuracy of grouping the wines, however, was still quite high at 96%.
-
+![t-SNE Clusters](tSNE_clusters.png)
 Again, I split the data into training and testing data in order to see how well we could predict the color of a new wine. Below you'll see the predictions versus the actual colors. For this step, I found that the perplexity needed to be increased to around 100 in order to hit an acceptable accuracy. Here, the accuracy was 95%.  
-<br> As a result of this analysis, I believe that PCA makes more sense as a dimension reduction technique for this dataset, as the overall accuracy for grouping and the accuracy in prediction were both higher than that of tSNE.  
+![t-SNE Predictions](tSNE_predictions.png)
+As a result of this analysis, I believe that PCA makes more sense as a dimension reduction technique for this dataset, as the overall accuracy for grouping and the accuracy in prediction were both higher than that of tSNE.  
 <br>Now, let's take a quick look at quality. First, I split quality into three groups: low (1-3), average (4-7), and high (8-10). Next, I tried to see if these groups would be visible in the graphs after dimension reduction. Below, you'll see the graphs for both dimension reduction techniques.
-
+![PCA Quality](PCA_quality.png)
+![t-SNE Quality](tSNE_quality.png)
 With tSNE, there seemed to be no strong pattern on where the wines were clustered based on quality. There are some looser patterns, but nothing that clustering would be able to capture. On the other hand, with PCA, there is one stronger group of high-quality wines in the middle of the graph. Because this is more clear, I decided to move forward and try k-means clustering with 3 clusters on this data. The graph for this is below. 
-
+![PCA Clusters by Quality](PCA_clusters_quality.png)
 Interestingly, the algorithm was able to find the cluster for the high-quality wines. However, there is no strong pattern for the very low-quality wines. Something to keep in mind here is that there are still a lot of average wines that are in the same area as the high-quality wines. As a result, clustering based on PCA can find where high-quality wines lie, but it can't separate them out from average wines very well.  
