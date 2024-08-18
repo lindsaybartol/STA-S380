@@ -137,4 +137,4 @@ In conclusion, I can answer the question: "What are the main topics, and which o
 <br>The most important topics, in order, are: China & International Relations, Financial Performance & Market Analysis, European Markets, Technology, and Labor & Company Management.  
 <br>Ultimately, this gives us insight into what are the most prevalent topics at this time, and what people want to hear about. It succinctly summarizes the issues that are at the forefront of readers' and reporters' minds.  
 <br>[Here is a PDF of my code and output.](./The-Reuters-Corpus.pdf)
-[here is the R file for my code.](./The%20Reuters%20Corpus.Rmd)
+<br>[Here is the R file for my code.](./The%20Reuters%20Corpus.Rmd)
