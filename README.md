@@ -92,6 +92,6 @@ In approaching this problem, I first ran PCA and tSNE to get a visual idea of ho
 ![PCA Clusters by Quality](PCA_clusters_quality.png)
 <br>Interestingly, the algorithm was able to find the cluster for the high-quality wines. However, there is no strong pattern for the very low-quality wines. Something to keep in mind here is that there are still a lot of average wines that are in the same area as the high-quality wines. As a result, clustering based on PCA can find where high-quality wines lie, but it can't separate them out from average wines very well.
 
-[Here is the code for PCA.](Wine_PCA.ipynb)
+[Here is the code for PCA.](Wine_PCA.ipynb) <br>
 [Here is the code for tSNE.](Wine_tSNE.ipynb)
 ## Market Segmentation
