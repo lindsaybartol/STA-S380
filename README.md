@@ -76,7 +76,7 @@ In approaching this problem, I first ran PCA and tSNE to get a visual idea of ho
 ![PCA Color](PCA_color.png)
 <br>After reducing the dimensions, I ran K-means clustering. Below is a graph showing where the cluster centers were found. Obviously, the technique seems quite effective, as it has found the centers of the red and yellow clusters. This clustering technique reached a 98% accuracy for grouping the wines based on color.<br>
 ![PCA Clusters](PCA_clusters.png)
-<br>Finally, I wanted to split the data into a training and testing set in order to see how well it might predict the color of a new wine based on its other qualities. Below you'll see two graphs of the testing data: one for the predicted color and one for the actual color. Again, there was a 98% accuracy on prediction.<br> 
+<br>Finally, I wanted to split the data into a training and testing set in order to see how well it might predict the color of a new wine based on its other qualities. Below you'll see two graphs of the testing data: one for the predicted color and one for the actual color. Again, there was a 98% accuracy on prediction. For reference, the baseline accuracy is 77%.<br> 
 ![PCA Predictions](PCA_predictions.png)
 <br>Now, let's take a look at tSNE. Below you'll see the graph after running tSNE. Again, this technique seemed to do a really good job of separating the two colors.<br>
 ![t-SNE Color](tSNE_color.png)
@@ -91,4 +91,7 @@ In approaching this problem, I first ran PCA and tSNE to get a visual idea of ho
 <br>With tSNE, there seemed to be no strong pattern on where the wines were clustered based on quality. There are some looser patterns, but nothing that clustering would be able to capture. On the other hand, with PCA, there is one stronger group of high-quality wines in the middle of the graph. Because this is more clear, I decided to move forward and try k-means clustering with 3 clusters on this data. The graph for this is below.<br> 
 ![PCA Clusters by Quality](PCA_clusters_quality.png)
 <br>Interestingly, the algorithm was able to find the cluster for the high-quality wines. However, there is no strong pattern for the very low-quality wines. Something to keep in mind here is that there are still a lot of average wines that are in the same area as the high-quality wines. As a result, clustering based on PCA can find where high-quality wines lie, but it can't separate them out from average wines very well.
+
+[Here is the code for PCA.](Wine_PCA.ipynb)
+[Here is the code for tSNE.](Wine_tSNE.ipynb)
 ## Market Segmentation
