@@ -136,8 +136,8 @@ After examining the words with the highest TF-IDF scores in each grouping, I ide
 In conclusion, I can answer the question: "What are the main topics, and which ones are most important from this corpus?"  
 <br>The most important topics, in order, are: China & International Relations, Financial Performance & Market Analysis, European Markets, Technology, and Labor & Company Management.  
 <br>Ultimately, this gives us insight into what are the most prevalent topics at this time, and what people want to hear about. It succinctly summarizes the issues that are at the forefront of readers' and reporters' minds.  
-<br>[Here is a PDF of my code and output.](./The-Reuters-Corpus.pdf)
-<br>[Here is the R file for my code.](./The%20Reuters%20Corpus.Rmd)
+<br>[Here is a PDF of my code and output.](The-Reuters-Corpus.pdf)
+<br>[Here is the R file for my code.](The%20Reuters%20Corpus.Rmd)
 ## Association Rule Mining
 After wrangling the data, I wanted to get some basic info on it. I found that there are 171 different grocery items that we are looking at. Additionally, I wanted to see what our top-selling items were. This can be seen in the bar plot below.
 ![Common Purchases](common_purchases.png)
@@ -153,4 +153,5 @@ Additionally, I have a network graph to depict these associations.
 Next, I wanted to explore some rarer combos. I thought this would be important as well because there are some product that are simply bought less frequently, but that doesn't mean that they don't have stronger associations. I decided to look at combos with a support between .002 and .005. To try to boost reliability with a lower support, I also raised the confidence and the lift to 0.3 and 3, respectively. This resulted in five associations, shown below.
 ![Associations Rare](associations_rare.png)
 These combinations seem a little more bizarre to me. I am unsure what the link between hamburger meat and instant food products is. However, the lift here is huge. I would like more information on what exactly "instant food products" include. Popcorn and salty snacks is an interesting combination to me as well, as I would have thought they'd be substitutes, not complements. the same goes for beer and liquor. Maybe people were shopping for parties. Rice and vegetables make sense. However, again, I am unsure what the link between turkey and tropical fruit would be. I would guess they are both just bought fairly frequently, and so they end up together at random.  
-<br> Overall, we can definitely see some meaningful relationships throughout this data, and I believe that this analysis would give a small grocer a valuable list of items to combine in specials and discounts.
+<br> Overall, we can definitely see some meaningful relationships throughout this data, and I believe that this analysis would give a small grocer a valuable list of items to combine in specials and discounts. The main recommendation I would make would be to first choose the items in the first list that have a high lift and a relatively larger support. This would include combinations like beef and root vegetables, onions and root vegetables, and berries and whipped cream.
+<br>[Here is the code for this problem.](Association%-%Groceries.ipynb)
