@@ -80,7 +80,7 @@ In approaching this problem, I first ran PCA and tSNE to get a visual idea of ho
 ![PCA Predictions](PCA_predictions.png)
 <br>Now, let's take a look at tSNE. Below you'll see the graph after running tSNE. Again, this technique seemed to do a really good job of separating the two colors.<br>
 ![t-SNE Color](tSNE_color.png)
-<br>However, while the groups seem very clear to the naked eye, K-Means clustering had a slightly harder time distinguishing them, as we can see below. The centers are mostly well-placed, but a little off. The overall accuracy of grouping the wines, however, was still quite high at 96<br>
+<br>However, while the groups seem very clear to the naked eye, K-Means clustering had a slightly harder time distinguishing them, as we can see below. The centers are mostly well-placed, but a little off. The overall accuracy of grouping the wines, however, was still quite high at 96%.<br>
 ![t-SNE Clusters](tSNE_clusters.png)
 <br>Again, I split the data into training and testing data in order to see how well we could predict the color of a new wine. Below you'll see the predictions versus the actual colors. For this step, I found that the perplexity needed to be increased to around 100 in order to hit an acceptable accuracy. Here, the accuracy was 95%.<br>  
 ![t-SNE Predictions](tSNE_predictions.png)
