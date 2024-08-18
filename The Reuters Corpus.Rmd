@@ -1,0 +1,192 @@
+---
+title: "The Reuters Corpus"
+author: "Lindsay Bartol"
+date: "2024-08-17"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, include = TRUE}
+library(tm) 
+library(tidyverse)
+library(slam)
+library(proxy)
+
+```
+
+```{r Reader Function, include = TRUE}
+#Here is the reader function
+readerPlain = function(fname){
+  readPlain(elem=list(content=readLines(fname)), 
+            id=fname, language='en') }
+```
+
+```{r Pre-Processing, include = TRUE}
+#defining the path to my dataset
+data_path <-"C:\\Users\\linds\\OneDrive\\Documents\\MSBA-lindsayslaptop\\STA S380\\ReutersC50\\C50train"
+author_dirs <- list.dirs(data_path, full.names =TRUE, recursive =FALSE)
+
+# Initialize an empty list to store documents
+all_documents <-list()
+all_mynames <-list()
+
+# Iterate over each author's directory
+for(author_dir in author_dirs){
+  file_list <- Sys.glob(file.path(author_dir,'*.txt'))
+  author_documents <- lapply(file_list, readerPlain)# Clean up the file names
+  mynames <- file_list %>%{ strsplit(.,'/', fixed=TRUE)}%>%{ lapply(., tail, n=2)}%>%{ lapply(., paste0, collapse ='')}%>%
+    unlist
+  
+# Store the documents and their cleaned names in the lists
+  all_documents <-c(all_documents, author_documents)
+  all_mynames <-c(all_mynames, mynames)}# Combine all documents into one list
+  names(all_documents)<- all_mynames
+
+# Create a text corpus from the combined documents
+documents_raw <- Corpus(VectorSource(all_documents))
+
+my_documents <- documents_raw
+my_documents <- tm_map(my_documents, content_transformer(tolower))# make everything lowercase
+my_documents <- tm_map(my_documents, content_transformer(removeNumbers))# remove numbers
+my_documents <- tm_map(my_documents, content_transformer(removePunctuation))# remove punctuation
+my_documents <- tm_map(my_documents, content_transformer(stripWhitespace))# remove excess white-space
+my_documents <- tm_map(my_documents, content_transformer(removeWords), stopwords("en"))# remove stopwords
+
+custom_stopwords <-c(stopwords("en"),"cuserslindsonedrivedocumentsmsbalindsayslaptopsta","datetimestamp","meta","gmt","isdst","language","mday","mon","month","wday","yday","year","zone","datetimestamp","listauthor","listcontent","listsec","sreuterscctrainlynneodonnellnewsmltxt","sreuterscctrainpeterhumphreynewsmltxt")
+my_documents <- tm_map(my_documents, removeWords, custom_stopwords)
+
+custom_stopwords <-c(stopwords("en"),"said","character","gmtoff","heading","origin","hour")
+my_documents <- tm_map(my_documents, removeWords, custom_stopwords)
+```
+
+```{r DTM, echo = TRUE}
+# Create a Document-Term Matrix for all documents
+DTM_all <- DocumentTermMatrix(my_documents)# Display basic summary statistics of the DTM
+DTM_all  # This will show you the number of documents and terms
+
+# Inspect the first 10 documents and the first 20 terms
+inspect(DTM_all[1:10,1:20])
+
+# Find words that appear in at least 750 documents
+frequent_terms <- findFreqTerms(DTM_all,750)
+print(frequent_terms)
+#a lot of china - these article proabbly talk a lot about global affairs
+#as expected, a lot of business/finance terms - market, growth, prices, etc.
+
+# Find words that are associated with"china" with a correlation of at least 0.25
+associations <- findAssocs(DTM_all,"china",0.25)
+print(associations)
+
+# Remove terms that appear in fewer than 5% of documents
+DTM_all_reduced <- removeSparseTerms(DTM_all,0.95)# Display the reduced DTM
+DTM_all_reduced
+inspect(DTM_all_reduced[1:50,1:50])
+#wow, this reduced it from like 32k word to around 800. That's a huge reduction. Might want to come back later and mess with this.
+
+# Compute TF-IDF weights
+tfidf_all <- weightTfIdf(DTM_all_reduced)# Inspect the TF-IDF matrix for the first document
+inspect(tfidf_all[1,])
+```
+Okay, so there was some interesting stuff in that last section. Looking at the most frequent terms, a lot of them were expected - things like market, price, analyst, financial. Something I found interesting, though, was that China made it up there pretty high. Potentially, there are a lot of articles on golobal affairs, specifically China.
+
+Reducing the terms led to a huge reduction- from over 30k to around 800. That's crazy.
+
+After that, I wanted to look at words associated with "China." A lot of it was fairly expected - ties, visit, economic, taiwan, relations, diplomatic, imports, etc. Terms relating to foreign relations.
+
+After applying tf-idf weights - there are 64 terms that have non-zero scores, versus 725 that have zero values
+```{r top tf idf for diff docs, include = TRUE}
+#I want to see the top words for every tenth document to get an idea for topics
+tfidf_dense <- as.matrix(tfidf_all)
+top_terms <-list()
+for(i in seq(1, nrow(tfidf_dense), by =10)){
+  doc_tfidf <- tfidf_dense[i,]# This should now be a numeric vector
+  max_index <- which.max(doc_tfidf)
+  top_term <- colnames(tfidf_dense)[max_index]
+  top_terms[[i]]<-list(term = top_term, score = doc_tfidf[max_index])
+  
+  cat("Document", i,"top term:", top_term,"with score:", doc_tfidf[max_index],"\n")}# Combine the results into a data frame
+top_terms_df <- do.call(rbind, lapply(top_terms, as.data.frame))
+top_terms_df <- data.frame(document = seq(1, nrow(tfidf_dense), by =10), top_terms_df)
+
+print(top_terms_df)
+```
+
+Themes I;m seeing relate to location. I feel like that will be a big easy for grouping documents. There are words like china, czech, french, toronto, etc. Other topics include the business topic- technology, housing, data, restructuring, rates, tax, bank. Other terms I'm seeing that are harder to group include television, health, human, and local.
+
+Now, let's get into topic modeling!
+```{r topic modeling, include = TRUE}
+library(topicmodels)# Set the number of topics
+k <- 5
+
+lda_model <- LDA(DTM_all_reduced, k = k, control =list(seed =1234))
+terms(lda_model,10)
+
+#these terms are all super similar, so I want to see the terms with the highest tf idf scores for each group.
+```
+
+```{r tf idf for topics, include = TRUE}
+doc_topic_distr <- posterior(lda_model)$topics
+doc_topics <- apply(doc_topic_distr,1, which.max)
+
+topic_top_tfidf_terms <-list()
+
+for(topic in 1:k){
+  topic_docs <- which(doc_topics == topic)
+  tfidf_subset <- tfidf_all[topic_docs,]
+  mean_tfidf <- colMeans(as.matrix(tfidf_subset))
+  top_terms <- sort(mean_tfidf, decreasing =TRUE)[1:20]
+  topic_top_tfidf_terms[[paste("Topic", topic)]]<- top_terms
+}
+
+for(topic in 1:k){
+  cat("Top TF-IDF terms for", paste("Topic", topic),":\n")
+  print(topic_top_tfidf_terms[[paste("Topic", topic)]])
+  cat("\n")}
+
+#after running this with 15 topics, multiple seem like they could be grouped - there are a number  of topics that could probably be grouped - computer/tech stuff and global affairs. I am going to reduce to 10. I think that should be plenty
+
+#ten still feels like too much- I really think we could narrow it down to about 5 main topics. This will push out more specific topics, but I want to know overarching ideas.
+
+#Topic 1 - Technology
+#Topic 2 - China and International Relations
+#Topic 3 - European Markets
+#Topic 4 - Labor & Company Management
+#Topic 5 - Financial Performance & Market Analysis
+
+
+#now I want to rename topics
+topic_names <-c("Topic 1"="Technology","Topic 2"="China and International Relations","Topic 3"="European Markets","Topic 4"="Labor & Company Management","Topic 5"="Financial Performance & Market Analysis")
+
+for(i in 1:k){
+  cat("Top TF-IDF terms for", topic_names[paste("Topic", i)],":\n")
+  print(topic_top_tfidf_terms[[paste("Topic", i)]])
+  cat("\n")}
+```
+
+```{r topic frequency, include = TRUE}
+#let's look at how many documents focus on each topic
+doc_topic_distr <- posterior(lda_model)$topics
+
+# Assign each document to the topic with the highest probability
+doc_topics <- apply(doc_topic_distr,1, which.max)# Count the number of documents assigned to each topic
+topic_counts <- table(doc_topics)# Print the results
+print(topic_counts)
+
+#let's look at overall distributions
+doc_topic_distr <- posterior(lda_model)$topics
+
+# Sum the topic probabilities across all documents
+topic_distribution_sums <- colSums(doc_topic_distr)# Print the summed distributions
+print("Summed Topic Distributions (should sum to 2500):")
+print(topic_distribution_sums)
+
+#the distributions are very even - this probably points to a lot of overlap
+
+```
+
+```
