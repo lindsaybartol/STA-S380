@@ -48,7 +48,8 @@ Here is a bar plot of the number of 10-week hits that artists with over 30 10-we
 <br>We can see that Elton John is the artist with the most 10-week hits, with over 50 songs that have stayed on the Billboard Top 100 for at least 10 weeks. He is followed by Madonna, who has just under 44, then Kenny Chesney, who has 42.  
 <br>The code for this graph can be found [here](Billboard%20Top%20100.ipynb#part-c).
 <br> (Note: You may have to scroll to Part C, as my anchored links have not been working)
-## Visual Story Telling Part 1
+## Visual Story Telling Part 1: Green Buildings
+
 ## Visual Story Telling Part 2: Capital Metro Data
 When first looking at the Cap Metro data, I wanted to make sure I understood the overall trends before I dug into the details. As a result, I started very broad. Below, you'll see a graph plotting the average number of people who got on and off the bus on a given day throughout the semester. 
 ![Total Boardings and Alightings](Total_Boardings_Alightings.png)
